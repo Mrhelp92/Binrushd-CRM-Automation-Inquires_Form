@@ -408,6 +408,11 @@
 
         setLockedFields(json.data);
         showToast("تم تحميل بيانات العميل بنجاح.", "ok");
+        if (json.warning) {
+          console.warn(json.warning);
+          showToast("تم التحميل لكن في مشكلة بتسجيل الفتح: " + json.warning, "err");
+        }
+
         setBtnLoading(refreshBtn, false);
       }catch(e){
         showToast("تعذر الاتصال بالخدمة. تحقق من الشبكة أو رابط الـ API.", "err");
