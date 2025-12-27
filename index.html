@@ -248,11 +248,6 @@
 
     <div class="card">
       <div class="meta">
-        <div class="pill"><span class="dot"></span> التتبع مفعل</div>
-        <p style="margin-top:14px;">
-          عند فتح الصفحة يتم تسجيل وقت الفتح تلقائيًا.
-          بعد إرسال النموذج يتم حفظ بيانات المتابعة وربطها بالعميل والفرع.
-        </p>
 
         <div class="pill" style="margin-top:14px;">
           <strong>Lead ID:</strong> <span id="leadIdPreview">—</span>
@@ -273,7 +268,7 @@
     // ================================
     // CONFIG: ضع رابط الـ FastAPI هنا
     // ================================
-    const API_BASE = "https://mr-help-binrushd-complains-form-collector.hf.space";
+    const API_BASE = "https://YOUR-FASTAPI-DOMAIN.com"; // <-- عدّلها
 
     function qs(name){
       return new URLSearchParams(location.search).get(name) || "";
@@ -288,7 +283,7 @@
     function setLockedFields(data){
       document.getElementById("leadName").value = data.lead_name || "";
       document.getElementById("leadPhone").value = data.lead_phone || "";
-      document.getElementById("dueDate").value = data.due_date || "";
+      document.getElementById("dueDate").value = formatHumanDate(data.due_date);
     }
 
     async function init(){
@@ -362,6 +357,23 @@
         showToast("تعذر الاتصال بالخدمة أثناء الإرسال.", "err");
       }
     });
+    
+    function formatHumanDate(isoString) {
+      if (!isoString) return "";
+    
+      const date = new Date(isoString);
+    
+      return new Intl.DateTimeFormat("ar-SA", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+      }).format(date);
+    }
+
 
     init();
   </script>
