@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>متابعة استفسار عميل - مجموعة بن رشد الطبية</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand:#E4252A;
+      --brand-dark:#B92024;
+      --brand-soft:#F08D90;
+      --bg:#0b0b0e;
+      --muted:#a9a9b6;
+      --text:#f4f4f7;
+      --stroke: rgba(255,255,255,0.12);
+      --shadow: 0 18px 40px rgba(0,0,0,0.45);
+      --radius: 18px;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:"Tajawal", system-ui, -apple-system, Segoe UI, Arial;
+      background:
+        radial-gradient(900px 600px at 85% 10%, rgba(228,37,42,0.28), transparent 55%),
+        radial-gradient(700px 500px at 15% 40%, rgba(240,141,144,0.14), transparent 60%),
+        linear-gradient(180deg, #07070a, #0b0b0e);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .wrap{
+      width:min(980px, 100%);
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap:18px;
+    }
+    @media (max-width: 900px){
+      .wrap{ grid-template-columns: 1fr; }
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .header{
+      padding:20px 22px;
+      border-bottom:1px solid var(--stroke);
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .logoMark{
+      width:44px; height:44px;
+      border-radius:12px;
+      background: linear-gradient(180deg, var(--brand-soft), var(--brand));
+      display:grid;
+      place-items:center;
+      box-shadow: 0 10px 24px rgba(228,37,42,0.25);
+      flex:0 0 auto;
+    }
+    .logoMark span{
+      font-weight:900;
+      font-size:22px;
+      color:white;
+      transform: translateY(-1px);
+      letter-spacing:0.5px;
+    }
+    .title h1{
+      font-size:18px; margin:0; font-weight:800; line-height:1.25;
+    }
+    .title p{
+      margin:2px 0 0; color:var(--muted); font-size:13px;
+    }
+    .content{ padding:18px 22px 22px; }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 700px){
+      .grid{ grid-template-columns:1fr; }
+    }
+    label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .field{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.25);
+      color:var(--text);
+      outline:none;
+      transition: 0.18s ease;
+      font-size:14px;
+    }
+    .field:focus{
+      border-color: rgba(228,37,42,0.65);
+      box-shadow: 0 0 0 4px rgba(228,37,42,0.12);
+    }
+    .field[disabled]{
+      opacity:0.9;
+      cursor:not-allowed;
+      background: rgba(255,255,255,0.05);
+    }
+    textarea.field{
+      min-height:120px;
+      resize: vertical;
+      line-height:1.6;
+    }
+    .actions{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .btn{
+      border:0;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:0.18s ease;
+      font-family:inherit;
+      font-size:14px;
+    }
+    .btn-primary{
+      background: linear-gradient(180deg, var(--brand), var(--brand-dark));
+      color:white;
+      box-shadow: 0 10px 22px rgba(228,37,42,0.25);
+    }
+    .btn-primary:hover{ transform: translateY(-1px); }
+    .btn-ghost{
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border:1px solid var(--stroke);
+    }
+    .meta{
+      padding:18px 22px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+    .pill{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      border:1px solid var(--stroke);
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.05);
+      margin-top:10px;
+      font-size:12px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(228,37,42,0.12);
+    }
+    .toast{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,0.25);
+      color: var(--text);
+      display:none;
+      font-size:13px;
+      line-height:1.6;
+    }
+    .toast.show{ display:block; }
+    .toast.ok{ border-color: rgba(46,204,113,0.35); }
+    .toast.err{ border-color: rgba(231,76,60,0.45); }
+    .small{ font-size:12px; color:var(--muted); }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="header">
+        <div class="logoMark"><span>B</span></div>
+        <div class="title">
+          <h1>نموذج متابعة استفسار عميل</h1>
+          <p>مجموعة بن رشد الطبية</p>
+        </div>
+      </div>
+
+      <div class="content">
+        <form id="followupForm">
+          <div class="grid">
+            <div>
+              <label>اسم العميل</label>
+              <input id="leadName" class="field" type="text" disabled />
+            </div>
+
+            <div>
+              <label>رقم الجوال</label>
+              <input id="leadPhone" class="field" type="text" disabled />
+            </div>
+
+            <div>
+              <label>آخر موعد للتواصل (Due Date)</label>
+              <input id="dueDate" class="field" type="text" disabled />
+            </div>
+
+            <div>
+              <label>تاريخ/وقت التواصل مع العميل</label>
+              <input id="contactedAt" class="field" type="datetime-local" required />
+              <div class="small" style="margin-top:6px;">اختر الوقت الفعلي اللي تم فيه التواصل</div>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;">
+            <label>ملاحظات الفرع (ماذا حدث مع العميل؟)</label>
+            <textarea id="notes" class="field" placeholder="اكتب ملخص المكالمة / نتيجة التواصل / موعد متابعة..." required></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">إرسال التحديث</button>
+            <button type="button" id="refreshBtn" class="btn btn-ghost">تحديث البيانات</button>
+          </div>
+
+          <div id="toast" class="toast"></div>
+
+          <!-- hidden ids -->
+          <input type="hidden" id="leadId" />
+          <input type="hidden" id="branchId" />
+          <input type="hidden" id="sig" />
+        </form>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="meta">
+        <div class="pill"><span class="dot"></span> التتبع مفعل</div>
+        <p style="margin-top:14px;">
+          عند فتح الصفحة يتم تسجيل وقت الفتح تلقائيًا.
+          بعد إرسال النموذج يتم حفظ بيانات المتابعة وربطها بالعميل والفرع.
+        </p>
+
+        <div class="pill" style="margin-top:14px;">
+          <strong>Lead ID:</strong> <span id="leadIdPreview">—</span>
+        </div>
+
+        <div class="pill" style="margin-top:10px;">
+          <strong>Branch ID:</strong> <span id="branchIdPreview">—</span>
+        </div>
+
+        <p class="small" style="margin-top:14px;">
+          إذا ظهر “الرابط غير صالح”، تواصل مع فريق الدعم لإرسال رابط جديد.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ================================
+    // CONFIG: ضع رابط الـ FastAPI هنا
+    // ================================
+    const API_BASE = "https://mr-help-binrushd-complains-form-collector.hf.space";
+
+    function qs(name){
+      return new URLSearchParams(location.search).get(name) || "";
+    }
+
+    function showToast(msg, type){
+      const t = document.getElementById("toast");
+      t.className = "toast show " + (type || "");
+      t.textContent = msg;
+    }
+
+    function setLockedFields(data){
+      document.getElementById("leadName").value = data.lead_name || "";
+      document.getElementById("leadPhone").value = data.lead_phone || "";
+      document.getElementById("dueDate").value = data.due_date || "";
+    }
+
+    async function init(){
+      const lead_id = qs("lead_id");
+      const branch_id = qs("branch_id");
+      const sig = qs("sig");
+
+      document.getElementById("leadId").value = lead_id;
+      document.getElementById("branchId").value = branch_id;
+      document.getElementById("sig").value = sig;
+
+      document.getElementById("leadIdPreview").textContent = lead_id || "—";
+      document.getElementById("branchIdPreview").textContent = branch_id || "—";
+
+      if(!lead_id || !branch_id || !sig){
+        showToast("الرابط غير مكتمل. يرجى التأكد من الرابط المرسل.", "err");
+        return;
+      }
+
+      try{
+        const ua = navigator.userAgent || "";
+        const url = `${API_BASE}/form/open?lead_id=${encodeURIComponent(lead_id)}&branch_id=${encodeURIComponent(branch_id)}&sig=${encodeURIComponent(sig)}&ua=${encodeURIComponent(ua)}`;
+        const res = await fetch(url, { method:"GET" });
+        const json = await res.json();
+
+        if(!res.ok || !json.ok){
+          showToast(json.error || "تعذر تحميل البيانات.", "err");
+          return;
+        }
+
+        setLockedFields(json.data);
+        showToast("تم تحميل بيانات العميل بنجاح.", "ok");
+      }catch(e){
+        showToast("تعذر الاتصال بالخدمة. تحقق من الشبكة أو رابط الـ API.", "err");
+      }
+    }
+
+    document.getElementById("refreshBtn").addEventListener("click", init);
+
+    document.getElementById("followupForm").addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+
+      const lead_id = document.getElementById("leadId").value;
+      const branch_id = document.getElementById("branchId").value;
+      const sig = document.getElementById("sig").value;
+
+      const contacted_at = document.getElementById("contactedAt").value;
+      const notes = document.getElementById("notes").value.trim();
+
+      if(!contacted_at || !notes){
+        showToast("فضلاً أكمل تاريخ التواصل والملاحظات.", "err");
+        return;
+      }
+
+      try{
+        const res = await fetch(`${API_BASE}/form/submit`, {
+          method: "POST",
+          headers: { "Content-Type":"application/json" },
+          body: JSON.stringify({ lead_id, branch_id, sig, contacted_at, notes })
+        });
+
+        const json = await res.json();
+        if(!res.ok || !json.ok){
+          showToast(json.error || "تعذر إرسال التحديث.", "err");
+          return;
+        }
+
+        showToast("تم حفظ التحديث بنجاح. شكرًا لكم.", "ok");
+        document.getElementById("notes").value = "";
+      }catch(e){
+        showToast("تعذر الاتصال بالخدمة أثناء الإرسال.", "err");
+      }
+    });
+
+    init();
+  </script>
+</body>
+</html>
