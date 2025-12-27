@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>متابعة استفسار عميل - مجموعة بن رشد الطبية</title>
 
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -15,12 +16,14 @@
       --brand-dark:#B92024;
       --brand-soft:#F08D90;
       --bg:#0b0b0e;
+      --card:#111118;
       --muted:#a9a9b6;
       --text:#f4f4f7;
       --stroke: rgba(255,255,255,0.12);
       --shadow: 0 18px 40px rgba(0,0,0,0.45);
       --radius: 18px;
     }
+
     *{ box-sizing:border-box; }
     body{
       margin:0;
@@ -37,18 +40,15 @@
       padding:24px;
     }
 
-    /* ✅ عمود واحد في الديسكتوب + موبايل */
     .wrap{
       width:min(980px, 100%);
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1.1fr 0.9fr;
       gap:18px;
     }
 
-    .left-col{
-      display:flex;
-      flex-direction:column;
-      gap:18px;
+    @media (max-width: 900px){
+      .wrap{ grid-template-columns: 1fr; }
     }
 
     .card{
@@ -58,6 +58,7 @@
       box-shadow:var(--shadow);
       overflow:hidden;
     }
+
     .header{
       padding:20px 22px;
       border-bottom:1px solid var(--stroke);
@@ -65,6 +66,7 @@
       align-items:center;
       gap:14px;
     }
+
     .logoMark{
       width:44px; height:44px;
       border-radius:12px;
@@ -74,6 +76,7 @@
       box-shadow: 0 10px 24px rgba(228,37,42,0.25);
       flex:0 0 auto;
     }
+
     .logoMark span{
       font-weight:900;
       font-size:22px;
@@ -81,13 +84,23 @@
       transform: translateY(-1px);
       letter-spacing:0.5px;
     }
+
     .title h1{
-      font-size:18px; margin:0; font-weight:800; line-height:1.25;
+      font-size:18px;
+      margin:0;
+      font-weight:800;
+      line-height:1.25;
     }
     .title p{
-      margin:2px 0 0; color:var(--muted); font-size:13px;
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size:13px;
     }
-    .content{ padding:18px 22px 22px; }
+
+    .content{
+      padding:18px 22px 22px;
+    }
+
     .grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -96,12 +109,14 @@
     @media (max-width: 700px){
       .grid{ grid-template-columns:1fr; }
     }
+
     label{
       display:block;
       font-size:12px;
       color:var(--muted);
       margin-bottom:6px;
     }
+
     .field{
       width:100%;
       padding:12px 12px;
@@ -122,6 +137,7 @@
       cursor:not-allowed;
       background: rgba(255,255,255,0.05);
     }
+
     textarea.field{
       min-height:120px;
       resize: vertical;
@@ -146,20 +162,15 @@
       transition:0.18s ease;
       font-family:inherit;
       font-size:14px;
-
-      /* ✅ للسبينر */
-      position: relative;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
     }
+
     .btn-primary{
       background: linear-gradient(180deg, var(--brand), var(--brand-dark));
       color:white;
       box-shadow: 0 10px 22px rgba(228,37,42,0.25);
     }
     .btn-primary:hover{ transform: translateY(-1px); }
+
     .btn-ghost{
       background: rgba(255,255,255,0.06);
       color: var(--text);
@@ -172,6 +183,7 @@
       font-size:13px;
       line-height:1.7;
     }
+
     .pill{
       display:inline-flex;
       gap:8px;
@@ -184,13 +196,10 @@
       font-size:12px;
     }
 
-    /* ✅ كارت IDs يكون "قد العناصر" في الديسكتوب */
-    .card.compact .meta{ padding:14px 18px; }
-    .card.compact{ width: fit-content; max-width: 100%; }
-    .card.compact .pill{ width: fit-content; max-width:100%; white-space: nowrap; }
-    @media (max-width:700px){
-      .card.compact{ width: 100%; }
-      .card.compact .pill{ width: 100%; white-space: normal; }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 5px rgba(228,37,42,0.12);
     }
 
     .toast{
@@ -207,118 +216,101 @@
     .toast.show{ display:block; }
     .toast.ok{ border-color: rgba(46,204,113,0.35); }
     .toast.err{ border-color: rgba(231,76,60,0.45); }
-    .small{ font-size:12px; color:var(--muted); }
 
-    /* ✅ Spinner + Loading State */
-    .spinner{
-      width:16px; height:16px;
-      border-radius:50%;
-      border:2px solid rgba(255,255,255,0.35);
-      border-top-color: rgba(255,255,255,0.95);
-      display:none;
-      animation: spin 0.75s linear infinite;
+    .small{
+      font-size:12px;
+      color:var(--muted);
     }
-    @keyframes spin{ to{ transform: rotate(360deg);} }
-
-    .btn.loading{
-      opacity:0.85;
-      cursor:not-allowed;
-      pointer-events:none;
-    }
-    .btn.loading .spinner{ display:inline-block; }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="left-col">
 
-      <!-- ✅ كارت الفورم -->
-      <div class="card">
-        <div class="header">
-          <div class="logoMark"><span>B</span></div>
-          <div class="title">
-            <h1>نموذج متابعة استفسار عميل</h1>
-            <p>مجموعة بن رشد الطبية</p>
-          </div>
-        </div>
-
-        <div class="content">
-          <form id="followupForm">
-            <div class="grid">
-              <div>
-                <label>اسم العميل</label>
-                <input id="leadName" class="field" type="text" disabled />
-              </div>
-
-              <div>
-                <label>رقم الجوال</label>
-                <input id="leadPhone" class="field" type="text" disabled />
-              </div>
-
-              <div>
-                <label>آخر موعد للتواصل (Due Date)</label>
-                <input id="dueDate" class="field" type="text" disabled />
-              </div>
-
-              <div>
-                <label>تاريخ/وقت التواصل مع العميل</label>
-                <input id="contactedAt" class="field" type="datetime-local" required />
-                <div class="small" style="margin-top:6px;">اختر الوقت الفعلي اللي تم فيه التواصل</div>
-              </div>
-            </div>
-
-            <div style="margin-top:14px;">
-              <label>ملاحظات الفرع (ماذا حدث مع العميل؟)</label>
-              <textarea id="notes" class="field" placeholder="اكتب ملخص المكالمة / نتيجة التواصل / موعد متابعة..." required></textarea>
-            </div>
-
-            <!-- ✅ أزرار فيها loading -->
-            <div class="actions">
-              <button id="submitBtn" type="submit" class="btn btn-primary">
-                <span class="btnText">إرسال التحديث</span>
-                <span class="spinner" aria-hidden="true"></span>
-              </button>
-
-              <button id="refreshBtn" type="button" class="btn btn-ghost">
-                <span class="btnText">تحديث البيانات</span>
-                <span class="spinner" aria-hidden="true"></span>
-              </button>
-            </div>
-
-            <div id="toast" class="toast"></div>
-
-            <!-- hidden ids -->
-            <input type="hidden" id="leadId" />
-            <input type="hidden" id="branchId" />
-            <input type="hidden" id="sig" />
-          </form>
+    <!-- Form Card -->
+    <div class="card">
+      <div class="header">
+        <div class="logoMark"><span>B</span></div>
+        <div class="title">
+          <h1>نموذج متابعة استفسار عميل</h1>
+          <p>مجموعة بن رشد الطبية</p>
         </div>
       </div>
 
-      <!-- ✅ كارت الـ IDs تحت الفورم (زي الموبايل) -->
-      <div class="card compact">
-        <div class="meta">
-          <div class="pill" style="margin-top:0;">
-            <strong>Lead ID:</strong> <span id="leadIdPreview">—</span>
+      <div class="content">
+        <form id="followupForm">
+          <div class="grid">
+            <div>
+              <label>اسم العميل</label>
+              <input id="leadName" class="field" type="text" disabled />
+            </div>
+            <div>
+              <label>رقم الجوال</label>
+              <input id="leadPhone" class="field" type="text" disabled />
+            </div>
+
+            <div>
+              <label>آخر موعد للتواصل (Due Date)</label>
+              <input id="dueDate" class="field" type="text" disabled />
+            </div>
+
+            <div>
+              <label>تاريخ/وقت التواصل مع العميل</label>
+              <input id="contactedAt" class="field" type="datetime-local" required />
+              <div class="small" style="margin-top:6px;">اختر الوقت الفعلي اللي تم فيه التواصل</div>
+            </div>
           </div>
 
-          <div class="pill" style="margin-top:10px;">
-            <strong>Branch ID:</strong> <span id="branchIdPreview">—</span>
+          <div style="margin-top:14px;">
+            <label>ملاحظات الفرع (ماذا حدث مع العميل؟)</label>
+            <textarea id="notes" class="field" placeholder="اكتب ملخص المكالمة / نتيجة التواصل / موعد متابعة..." required></textarea>
           </div>
 
-          <p class="small" style="margin-top:14px;">
-            إذا ظهر “الرابط غير صالح”، تواصل مع فريق الدعم لإرسال رابط جديد.
-          </p>
-        </div>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary">إرسال التحديث</button>
+            <button type="button" id="refreshBtn" class="btn btn-ghost">تحديث البيانات</button>
+          </div>
+
+          <div id="toast" class="toast"></div>
+
+          <!-- hidden ids -->
+          <input type="hidden" id="leadId" />
+          <input type="hidden" id="branchId" />
+          <input type="hidden" id="token" />
+        </form>
       </div>
-
     </div>
+
+    <!-- Side Info -->
+    <div class="card">
+      <div class="meta">
+        <div class="pill"><span class="dot"></span> التتبع مفعل</div>
+        <p style="margin-top:14px;">
+          عند فتح الصفحة يتم تسجيل وقت الفتح تلقائيًا.
+          بعد إرسال النموذج يتم حفظ بيانات المتابعة وربطها بالعميل والفرع.
+        </p>
+
+        <div class="pill" style="margin-top:14px;">
+          <strong>Lead ID:</strong>
+          <span id="leadIdPreview">—</span>
+        </div>
+
+        <div class="pill" style="margin-top:10px;">
+          <strong>Branch ID:</strong>
+          <span id="branchIdPreview">—</span>
+        </div>
+
+        <p class="small" style="margin-top:14px;">
+          إذا وصلتك رسالة “لينك غير صالح”، معناها التوكن انتهى أو البيانات تم تعديلها.
+        </p>
+      </div>
+    </div>
+
   </div>
 
   <script>
     // ================================
-    // CONFIG: رابط الـ FastAPI
+    // CONFIG: ضع رابط الـ FastAPI هنا
     // ================================
     const API_BASE = "https://mr-help-binrushd-complains-form-collector.hf.space";
 
@@ -332,91 +324,47 @@
       t.textContent = msg;
     }
 
-    function formatHumanDate(isoString) {
-      if (!isoString) return "";
-      const date = new Date(isoString);
-      return new Intl.DateTimeFormat("ar-SA", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true
-      }).format(date);
-    }
-
     function setLockedFields(data){
       document.getElementById("leadName").value = data.lead_name || "";
       document.getElementById("leadPhone").value = data.lead_phone || "";
-      document.getElementById("dueDate").value = formatHumanDate(data.due_date);
-    }
+      document.getElementById("dueDate").value = data.due_date || "";
 
-    function setBtnLoading(btn, isLoading, loadingText){
-      if(!btn) return;
-
-      const textEl = btn.querySelector(".btnText");
-      const original = btn.getAttribute("data-original-text") || (textEl ? textEl.textContent : "");
-
-      if(!btn.getAttribute("data-original-text") && textEl){
-        btn.setAttribute("data-original-text", original);
-      }
-
-      if(isLoading){
-        btn.classList.add("loading");
-        btn.disabled = true;
-        if(textEl && loadingText) textEl.textContent = loadingText;
-      }else{
-        btn.classList.remove("loading");
-        btn.disabled = false;
-        if(textEl) textEl.textContent = btn.getAttribute("data-original-text") || original;
-      }
+      document.getElementById("leadIdPreview").textContent = data.lead_id || "—";
+      document.getElementById("branchIdPreview").textContent = data.branch_id || "—";
     }
 
     async function init(){
-      const refreshBtn = document.getElementById("refreshBtn");
-      setBtnLoading(refreshBtn, true, "جاري التحديث...");
-
       const lead_id = qs("lead_id");
       const branch_id = qs("branch_id");
-      const sig = qs("sig");
+      const token = qs("token");
 
       document.getElementById("leadId").value = lead_id;
       document.getElementById("branchId").value = branch_id;
-      document.getElementById("sig").value = sig;
+      document.getElementById("token").value = token;
 
       document.getElementById("leadIdPreview").textContent = lead_id || "—";
       document.getElementById("branchIdPreview").textContent = branch_id || "—";
 
-      if(!lead_id || !branch_id || !sig){
+      if(!lead_id || !branch_id || !token){
         showToast("الرابط غير مكتمل. يرجى التأكد من الرابط المرسل.", "err");
-        setBtnLoading(refreshBtn, false);
         return;
       }
 
+      // call /form/open (يسجّل فتح + يرجع بيانات الليد)
       try{
-        const ua = navigator.userAgent || "";
-        const url = `${API_BASE}/form/open?lead_id=${encodeURIComponent(lead_id)}&branch_id=${encodeURIComponent(branch_id)}&sig=${encodeURIComponent(sig)}&ua=${encodeURIComponent(ua)}`;
+        const url = `${API_BASE}/form/open?lead_id=${encodeURIComponent(lead_id)}&branch_id=${encodeURIComponent(branch_id)}&token=${encodeURIComponent(token)}`;
         const res = await fetch(url, { method:"GET" });
         const json = await res.json();
 
         if(!res.ok || !json.ok){
-          showToast(json.error || "تعذر تحميل البيانات.", "err");
-          setBtnLoading(refreshBtn, false);
+          showToast(json.error || "تعذر تحميل البيانات. يرجى المحاولة لاحقًا.", "err");
           return;
         }
 
         setLockedFields(json.data);
         showToast("تم تحميل بيانات العميل بنجاح.", "ok");
-        if (json.warning) {
-          console.warn(json.warning);
-          showToast("تم التحميل لكن في مشكلة بتسجيل الفتح: " + json.warning, "err");
-        }
-
-        setBtnLoading(refreshBtn, false);
       }catch(e){
         showToast("تعذر الاتصال بالخدمة. تحقق من الشبكة أو رابط الـ API.", "err");
-        setBtnLoading(refreshBtn, false);
       }
     }
 
@@ -425,19 +373,15 @@
     document.getElementById("followupForm").addEventListener("submit", async (ev) => {
       ev.preventDefault();
 
-      const submitBtn = document.getElementById("submitBtn");
-      setBtnLoading(submitBtn, true, "جاري الإرسال...");
-
       const lead_id = document.getElementById("leadId").value;
       const branch_id = document.getElementById("branchId").value;
-      const sig = document.getElementById("sig").value;
+      const token = document.getElementById("token").value;
 
       const contacted_at = document.getElementById("contactedAt").value;
       const notes = document.getElementById("notes").value.trim();
 
       if(!contacted_at || !notes){
         showToast("فضلاً أكمل تاريخ التواصل والملاحظات.", "err");
-        setBtnLoading(submitBtn, false);
         return;
       }
 
@@ -445,22 +389,23 @@
         const res = await fetch(`${API_BASE}/form/submit`, {
           method: "POST",
           headers: { "Content-Type":"application/json" },
-          body: JSON.stringify({ lead_id, branch_id, sig, contacted_at, notes })
+          body: JSON.stringify({
+            lead_id, branch_id, token,
+            contacted_at,
+            notes
+          })
         });
 
         const json = await res.json();
         if(!res.ok || !json.ok){
           showToast(json.error || "تعذر إرسال التحديث.", "err");
-          setBtnLoading(submitBtn, false);
           return;
         }
 
         showToast("تم حفظ التحديث بنجاح. شكرًا لكم.", "ok");
         document.getElementById("notes").value = "";
-        setBtnLoading(submitBtn, false);
       }catch(e){
         showToast("تعذر الاتصال بالخدمة أثناء الإرسال.", "err");
-        setBtnLoading(submitBtn, false);
       }
     });
 
